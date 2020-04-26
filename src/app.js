@@ -3,7 +3,6 @@ const session = require('express-session');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
 
-const redisClient = redis.createClient();
 const compression = require('compression');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
@@ -12,7 +11,10 @@ const morgan = require('morgan');
 const routes = require('./routes');
 
 const app = express();
-
+const redisClient = redis.createClient({
+  host: process.env.REDIS_HOST,
+  port: 6379
+});
 app.use(helmet());
 app.use(compression());
 
