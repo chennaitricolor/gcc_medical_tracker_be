@@ -14,6 +14,7 @@ services:
       DB_PWD: ${DB_PWD}
       DB_USER: ${DB_USER}
       ENABLE_SSL: ${ENABLE_SSL}
+      REDIS_HOST: ${REDIS_HOST}
     ports:
       - "3010:3010"
     networks:
