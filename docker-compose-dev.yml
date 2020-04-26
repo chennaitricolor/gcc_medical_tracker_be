@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  gcc-medical-tracker:
+    image: ${APP_NAME}/${APP_TYPE}:${TAG}
+    env_file: env_vars/${RELEASE_ENVIRONMENT}.env
+    depends_on:
+      - redis
+    environment:
+      NODE_ENV: ${GO_STAGE_NAME}
+      AUTH_KEY: ${AUTH_KEY}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_PWD: ${DB_PWD}
+      DB_USER: ${DB_USER}
+      ENABLE_SSL: ${ENABLE_SSL}
+    ports:
+      - "3010:3010"
+    networks:
+      app:
+  redis:
+    image: redis
+    networks:
+      app:
+
+networks:
+  app:
+
+
