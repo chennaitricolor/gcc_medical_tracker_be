@@ -39,5 +39,5 @@ module.exports = function (sequelize, DataTypes) {
     tableName: 'zones',
     timestamps: false
   });
-  return zones
+  return zones;
 };

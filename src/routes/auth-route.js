@@ -31,11 +31,10 @@ router.post('/change-password', isTempUser, validator(authSchema.changePassword,
       return res.send({
         success: true
       });
-    } else {
-      return res.status(401).send({
-        message: 'New password same as old password'
-      });
     }
+    return res.status(401).send({
+      message: 'New password same as old password'
+    });
   } catch (e) {
     return res.status(401).json({
       message: e.message

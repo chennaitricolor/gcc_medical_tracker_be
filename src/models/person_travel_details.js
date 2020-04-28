@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
   personTravelDetails.associate = (db) => {
-    personTravelDetails.belongsTo(db['address'], {foreignKey: 'address_key'});
+    personTravelDetails.belongsTo(db.address, { foreignKey: 'address_key' });
   };
-  return personTravelDetails
+  return personTravelDetails;
 };

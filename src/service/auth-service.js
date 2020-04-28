@@ -4,9 +4,9 @@ module.exports = {
   login: async (userName, password) => {
     try {
       const medicalOfficerRecord = await medicalOfficer.findByPk(userName);
-      const passwordCompare = medicalOfficerRecord.first_login_indicator ?
-        password === medicalOfficerRecord.password :
-        await medicalOfficerRecord.validPassword(password);
+      const passwordCompare = medicalOfficerRecord.first_login_indicator
+        ? password === medicalOfficerRecord.password
+        : await medicalOfficerRecord.validPassword(password);
       if (passwordCompare) {
         return [true, medicalOfficerRecord.first_login_indicator];
       }
@@ -23,7 +23,7 @@ module.exports = {
           first_login_indicator: true
         }
       });
-      if(medicalOfficerRecord.password === password) {
+      if (medicalOfficerRecord.password === password) {
         return false;
       }
       medicalOfficerRecord.password = password;

@@ -101,12 +101,12 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
   personDetails.associate = (db) => {
-    personDetails.belongsTo(db['medicalOfficer'], {as: 'createdBy', foreignKey: 'createdby'});
-    personDetails.belongsTo(db['medicalOfficer'], {as: 'updatedBy', foreignKey: 'updatedby'});
-    personDetails.belongsTo(personDetails, {as: 'contractedBy', foreignKey: 'contractedby'});
-    personDetails.belongsTo(db['address'], {as: 'permanentAddress', foreignKey: 'permanent_address_key'});
-    personDetails.belongsTo(db['address'], {as: 'currentAddress', foreignKey: 'current_address_key'});
-    personDetails.hasMany(db['personCallTransaction'], {foreignKey: 'person_identifier'});
+    personDetails.belongsTo(db.medicalOfficer, { as: 'createdBy', foreignKey: 'createdby' });
+    personDetails.belongsTo(db.medicalOfficer, { as: 'updatedBy', foreignKey: 'updatedby' });
+    personDetails.belongsTo(personDetails, { as: 'contractedBy', foreignKey: 'contractedby' });
+    personDetails.belongsTo(db.address, { as: 'permanentAddress', foreignKey: 'permanent_address_key' });
+    personDetails.belongsTo(db.address, { as: 'currentAddress', foreignKey: 'current_address_key' });
+    personDetails.hasMany(db.personCallTransaction, { foreignKey: 'person_identifier' });
   };
   return personDetails;
 };

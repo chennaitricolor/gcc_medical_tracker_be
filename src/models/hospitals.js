@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function (sequelize, DataTypes) {
-  const hospital =  sequelize.define('hospitals', {
+  const hospital = sequelize.define('hospitals', {
     hospital_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -57,7 +57,7 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   hospital.associate = (db) => {
-    hospital.belongsTo(db['address'], {foreignKey: 'address_key'});
+    hospital.belongsTo(db.address, { foreignKey: 'address_key' });
   };
   return hospital;
 };

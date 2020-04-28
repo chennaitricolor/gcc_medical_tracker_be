@@ -1,8 +1,12 @@
 let Joi = require('joi');
 const joiPhoneNumber = require('joi-phone-number');
 const joiDateExtension = require('joi-date-extensions');
+
 const phoneJoi = Joi.extend(joiPhoneNumber);
-const { ANSWERED_BY, BUILDING_TYPE, LOCATION_TYPES, HEALTH_STATUS, PLACE_TYPE, MODE_OF_TRAVEL, CALL_TYPE } = require('../constants');
+const {
+  ANSWERED_BY, BUILDING_TYPE, LOCATION_TYPES, HEALTH_STATUS, PLACE_TYPE, MODE_OF_TRAVEL, CALL_TYPE
+} = require('../constants');
+
 const addressJoi = Joi.object({
   type: Joi.string().only(BUILDING_TYPE).required(),
   numberAndFloor: Joi.string().required(),
@@ -16,7 +20,6 @@ const addressJoi = Joi.object({
 });
 
 Joi = Joi.extend(joiDateExtension);
-
 
 
 module.exports = {
@@ -35,7 +38,7 @@ module.exports = {
     type: Joi.string().only(LOCATION_TYPES)
   }),
   person: Joi.object({
-    callDetails:  Joi.object({
+    callDetails: Joi.object({
       phoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }).required(),
       answeredBy: Joi.string().only(ANSWERED_BY),
       isSuspected: Joi.string().only('Y', 'N').required(),
@@ -54,7 +57,7 @@ module.exports = {
       diabetesIndicator: Joi.string().only('Y', 'N').required(),
       hyperTensionIndicator: Joi.string().only('Y', 'N').required(),
       otherIllness: Joi.string()
-    }).when(Joi.object({travelledAbroad: 'Y' }).unknown(), {
+    }).when(Joi.object({ travelledAbroad: 'Y' }).unknown(), {
       then: Joi.object({
         countryVisited: Joi.string().required(),
         dateOfArraival: Joi.date().format('DD-MM-YYYY').raw().required()
@@ -72,7 +75,7 @@ module.exports = {
       testedPositiveOn: Joi.date().format('DD-MM-YYYY').raw(),
       testedNegativeOn: Joi.date().format('DD-MM-YYYY').raw(),
       dateOfDischarge: Joi.date().format('DD-MM-YYYY').raw(),
-    }).when(Joi.object({attenderName: Joi.string().required() }).unknown(), {
+    }).when(Joi.object({ attenderName: Joi.string().required() }).unknown(), {
       then: Joi.object({
         attenderNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }).required(),
       })
@@ -97,7 +100,7 @@ module.exports = {
     )
   }),
   updatePerson: Joi.object({
-    callDetails:  Joi.object({
+    callDetails: Joi.object({
       callSuccessfulIndicator: Joi.string().only('Y', 'N').required(),
       wrongNumberIndicator: Joi.string().only('Y', 'N').required(),
       callNotRespondingIndicator: Joi.string().only('Y', 'N').required(),
@@ -122,7 +125,7 @@ module.exports = {
       diabetesIndicator: Joi.string().only('Y', 'N'),
       hyperTensionIndicator: Joi.string().only('Y', 'N'),
       otherIllness: Joi.string()
-    }).when(Joi.object({travelledAbroad: 'Y' }).unknown(), {
+    }).when(Joi.object({ travelledAbroad: 'Y' }).unknown(), {
       then: Joi.object({
         countryVisited: Joi.string().required(),
         dateOfArraival: Joi.date().format('DD-MM-YYYY').raw().required()
@@ -140,7 +143,7 @@ module.exports = {
       testedPositiveOn: Joi.date().format('DD-MM-YYYY').raw(),
       testedNegativeOn: Joi.date().format('DD-MM-YYYY').raw(),
       dateOfDischarge: Joi.date().format('DD-MM-YYYY').raw(),
-    }).when(Joi.object({attenderName: Joi.string().required() }).unknown(), {
+    }).when(Joi.object({ attenderName: Joi.string().required() }).unknown(), {
       then: Joi.object({
         attenderNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }).required(),
       })

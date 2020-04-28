@@ -59,15 +59,15 @@ const TravelDetailToDbMapper = {
   modeOfTravel: 'mode_of_travel',
 };
 
-const objectMapper = (source={}, mapper) => {
+const objectMapper = (source = {}, mapper) => {
   const resultObject = {};
-  Object.keys(source).forEach(key => {
+  Object.keys(source).forEach((key) => {
     if (mapper[key]) {
-      resultObject[mapper[key]] = source[key]
+      resultObject[mapper[key]] = source[key];
     }
   });
   return resultObject;
-}
+};
 
 
 module.exports = {

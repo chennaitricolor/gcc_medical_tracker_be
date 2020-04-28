@@ -67,9 +67,9 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
   personCall.associate = (db) => {
-    personCall.belongsTo(db['personDetails'], {foreignKey: 'person_identifier'});
-    personCall.belongsTo(db['hospitals'], {as: 'hospital', foreignKey: 'hospital_id'});
-    personCall.belongsTo(db['address'], {foreignKey: 'current_address_key'});
+    personCall.belongsTo(db.personDetails, { foreignKey: 'person_identifier' });
+    personCall.belongsTo(db.hospitals, { as: 'hospital', foreignKey: 'hospital_id' });
+    personCall.belongsTo(db.address, { foreignKey: 'current_address_key' });
   };
-  return personCall
+  return personCall;
 };

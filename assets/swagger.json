@@ -1,0 +1,1534 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Swagger Gcc Medical Tracker",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.dev.gccservice.in/medicaltracker"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login as a medical officer",
+        "requestBody": {
+          "description": "Medical officer credentials",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Change Password for first time logged in users",
+        "requestBody": {
+          "description": "Medical officer credentials",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Password"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/hospitals": {
+      "get": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "List hospitals",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "number",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "hospitals": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/locations/{type}": {
+      "get": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "List locations",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "area",
+                "ward",
+                "zone",
+                "location",
+                "street_name"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "area",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ward",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "location",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "zone",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "street_name",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "locations": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/persons/{id}": {
+      "get": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "Get person details",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "area",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ward",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "details": {
+                          "type": "object",
+                          "properties": {
+                            "basic": {
+                              "type": "object"
+                            },
+                            "travel": {
+                              "type": "object"
+                            },
+                            "lastCall": {
+                              "type": "object"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "Update person details",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Update-Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/persons": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "Update person details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/zones": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Get zones with ward details",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "zones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ward": {
+                                "type": "string",
+                                "description": "Comma separated ward numbers",
+                                "example": "61,62,63"
+                              },
+                              "zone": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/wards/{id}": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Get persons in ward",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "gender",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "M",
+                "F"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "age",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "in": "query",
+            "name": "currentAddress",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "permanentAddress",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "healthStatus",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "quarantined"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "number"
+                        },
+                        "persons": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Login": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Password": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "callDetails": {
+            "type": "object",
+            "properties": {
+              "phoneNumber": {
+                "type": "string"
+              },
+              "answeredBy": {
+                "type": "string",
+                "enum": [
+                  "Self",
+                  "Family",
+                  "Friends",
+                  "Others"
+                ]
+              },
+              "isSuspected": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              }
+            },
+            "required": [
+              "phoneNumber",
+              "isSuspected"
+            ],
+            "additionalProperties": false
+          },
+          "basicDetails": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "age": {
+                "type": "number",
+                "format": "float"
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Apartment",
+                      "Individual House",
+                      "Hospital",
+                      "Others"
+                    ]
+                  },
+                  "numberAndFloor": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "addressMeta": {
+                    "type": "string"
+                  },
+                  "area": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string",
+                    "default": "Chennai"
+                  },
+                  "state": {
+                    "type": "string",
+                    "default": "Tamil Nadu"
+                  },
+                  "pinCode": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "locationId": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                },
+                "required": [
+                  "type",
+                  "numberAndFloor",
+                  "street",
+                  "area",
+                  "pinCode",
+                  "locationId"
+                ],
+                "additionalProperties": false
+              },
+              "gender": {
+                "type": "string",
+                "enum": [
+                  "M",
+                  "F"
+                ]
+              },
+              "passport": {
+                "type": "string"
+              },
+              "phoneNumber": {
+                "type": "string"
+              },
+              "secondaryPhoneNumber": {
+                "type": "string"
+              },
+              "travelledAbroad": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "remarks": {
+                "type": "string"
+              },
+              "familyMembersCount": {
+                "type": "number",
+                "format": "float"
+              },
+              "diabetesIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "hyperTensionIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "otherIllness": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "age",
+              "address",
+              "gender",
+              "phoneNumber",
+              "travelledAbroad",
+              "familyMembersCount",
+              "diabetesIndicator",
+              "hyperTensionIndicator"
+            ],
+            "additionalProperties": false,
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "countryVisited": {
+                    "type": "string"
+                  },
+                  "dateOfArraival": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "countryVisited",
+                  "dateOfArraival"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "transactionDetails": {
+            "type": "object",
+            "properties": {
+              "currentAddressSame": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "currentAddress": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Apartment",
+                      "Individual House",
+                      "Hospital",
+                      "Others"
+                    ]
+                  },
+                  "numberAndFloor": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "addressMeta": {
+                    "type": "string"
+                  },
+                  "area": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string",
+                    "default": "Chennai"
+                  },
+                  "state": {
+                    "type": "string",
+                    "default": "Tamil Nadu"
+                  },
+                  "pinCode": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "locationId": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                },
+                "required": [
+                  "type",
+                  "numberAndFloor",
+                  "street",
+                  "area",
+                  "pinCode",
+                  "locationId"
+                ],
+                "additionalProperties": false
+              },
+              "healthStatus": {
+                "type": "string",
+                "enum": [
+                  "quarantined"
+                ]
+              },
+              "attenderName": {
+                "type": "string"
+              },
+              "symptoms": {
+                "type": "string"
+              },
+              "dateOfFirstSymptom": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "hospitalId": {
+                "type": "number",
+                "format": "float"
+              },
+              "dateOfAdmission": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "testedPositiveOn": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "testedNegativeOn": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dateOfDischarge": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "currentAddressSame",
+              "currentAddress",
+              "healthStatus",
+              "symptoms",
+              "dateOfFirstSymptom"
+            ],
+            "additionalProperties": false,
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "attenderNumber": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "attenderNumber"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "travelDetails": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "placeOfVisit": {
+                  "type": "string"
+                },
+                "placeType": {
+                  "type": "string",
+                  "enum": [
+                    "Mall",
+                    "Theater",
+                    "Place of worship",
+                    "Market",
+                    "Others"
+                  ]
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Apartment",
+                        "Individual House",
+                        "Hospital",
+                        "Others"
+                      ]
+                    },
+                    "numberAndFloor": {
+                      "type": "string"
+                    },
+                    "street": {
+                      "type": "string"
+                    },
+                    "addressMeta": {
+                      "type": "string"
+                    },
+                    "area": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string",
+                      "default": "Chennai"
+                    },
+                    "state": {
+                      "type": "string",
+                      "default": "Tamil Nadu"
+                    },
+                    "pinCode": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "locationId": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "numberAndFloor",
+                    "street",
+                    "area",
+                    "pinCode",
+                    "locationId"
+                  ],
+                  "additionalProperties": false
+                },
+                "visitedDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modeOfTravel": {
+                  "type": "string",
+                  "enum": [
+                    "Car",
+                    "Bike",
+                    "Public Transport",
+                    "Others"
+                  ]
+                }
+              },
+              "required": [
+                "placeOfVisit",
+                "placeType",
+                "address",
+                "visitedDate",
+                "modeOfTravel"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "contractedPersons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "gender": {
+                  "type": "string",
+                  "enum": [
+                    "M",
+                    "F"
+                  ]
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "secondaryPhoneNumber": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "age",
+                "gender",
+                "phoneNumber"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "callDetails",
+          "basicDetails",
+          "transactionDetails"
+        ],
+        "additionalProperties": false
+      },
+      "Update-Person": {
+        "type": "object",
+        "properties": {
+          "callDetails": {
+            "type": "object",
+            "properties": {
+              "callSuccessfulIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "wrongNumberIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "callNotRespondingIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "incorrectPhoneNumber": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "inboundOrOutbound": {
+                "type": "string",
+                "enum": [
+                  "incoming",
+                  "outgoing"
+                ]
+              },
+              "phoneNumber": {
+                "type": "string"
+              },
+              "answeredBy": {
+                "type": "string",
+                "enum": [
+                  "Self",
+                  "Family",
+                  "Friends",
+                  "Others"
+                ]
+              },
+              "isSuspected": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              }
+            },
+            "required": [
+              "callSuccessfulIndicator",
+              "wrongNumberIndicator",
+              "callNotRespondingIndicator",
+              "incorrectPhoneNumber",
+              "inboundOrOutbound",
+              "phoneNumber",
+              "isSuspected"
+            ],
+            "additionalProperties": false
+          },
+          "basicDetails": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "addressChanged": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Apartment",
+                      "Individual House",
+                      "Hospital",
+                      "Others"
+                    ]
+                  },
+                  "numberAndFloor": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "addressMeta": {
+                    "type": "string"
+                  },
+                  "area": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string",
+                    "default": "Chennai"
+                  },
+                  "state": {
+                    "type": "string",
+                    "default": "Tamil Nadu"
+                  },
+                  "pinCode": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "locationId": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                },
+                "required": [
+                  "type",
+                  "numberAndFloor",
+                  "street",
+                  "area",
+                  "pinCode",
+                  "locationId"
+                ],
+                "additionalProperties": false
+              },
+              "age": {
+                "type": "number",
+                "format": "float"
+              },
+              "gender": {
+                "type": "string",
+                "enum": [
+                  "M",
+                  "F"
+                ]
+              },
+              "passport": {
+                "type": "string"
+              },
+              "phoneNumber": {
+                "type": "string"
+              },
+              "secondaryPhoneNumber": {
+                "type": "string"
+              },
+              "travelledAbroad": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "remarks": {
+                "type": "string"
+              },
+              "familyMembersCount": {
+                "type": "number",
+                "format": "float"
+              },
+              "diabetesIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "hyperTensionIndicator": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "otherIllness": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "addressChanged"
+            ],
+            "additionalProperties": false,
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "countryVisited": {
+                    "type": "string"
+                  },
+                  "dateOfArraival": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "countryVisited",
+                  "dateOfArraival"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "transactionDetails": {
+            "type": "object",
+            "properties": {
+              "currentAddressChanged": {
+                "type": "string",
+                "enum": [
+                  "Y",
+                  "N"
+                ]
+              },
+              "currentAddress": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Apartment",
+                      "Individual House",
+                      "Hospital",
+                      "Others"
+                    ]
+                  },
+                  "numberAndFloor": {
+                    "type": "string"
+                  },
+                  "street": {
+                    "type": "string"
+                  },
+                  "addressMeta": {
+                    "type": "string"
+                  },
+                  "area": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string",
+                    "default": "Chennai"
+                  },
+                  "state": {
+                    "type": "string",
+                    "default": "Tamil Nadu"
+                  },
+                  "pinCode": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "locationId": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                },
+                "required": [
+                  "type",
+                  "numberAndFloor",
+                  "street",
+                  "area",
+                  "pinCode",
+                  "locationId"
+                ],
+                "additionalProperties": false
+              },
+              "healthStatus": {
+                "type": "string",
+                "enum": [
+                  "quarantined"
+                ]
+              },
+              "attenderName": {
+                "type": "string"
+              },
+              "symptoms": {
+                "type": "string"
+              },
+              "dateOfFirstSymptom": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "hospitalId": {
+                "type": "number",
+                "format": "float"
+              },
+              "dateOfAdmission": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "testedPositiveOn": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "testedNegativeOn": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "dateOfDischarge": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "currentAddressChanged",
+              "currentAddress",
+              "healthStatus",
+              "symptoms",
+              "dateOfFirstSymptom"
+            ],
+            "additionalProperties": false,
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "attenderNumber": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "attenderNumber"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "travelDetails": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "placeOfVisit": {
+                  "type": "string"
+                },
+                "placeType": {
+                  "type": "string",
+                  "enum": [
+                    "Mall",
+                    "Theater",
+                    "Place of worship",
+                    "Market",
+                    "Others"
+                  ]
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Apartment",
+                        "Individual House",
+                        "Hospital",
+                        "Others"
+                      ]
+                    },
+                    "numberAndFloor": {
+                      "type": "string"
+                    },
+                    "street": {
+                      "type": "string"
+                    },
+                    "addressMeta": {
+                      "type": "string"
+                    },
+                    "area": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string",
+                      "default": "Chennai"
+                    },
+                    "state": {
+                      "type": "string",
+                      "default": "Tamil Nadu"
+                    },
+                    "pinCode": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "locationId": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "numberAndFloor",
+                    "street",
+                    "area",
+                    "pinCode",
+                    "locationId"
+                  ],
+                  "additionalProperties": false
+                },
+                "visitedDate": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modeOfTravel": {
+                  "type": "string",
+                  "enum": [
+                    "Car",
+                    "Bike",
+                    "Public Transport",
+                    "Others"
+                  ]
+                }
+              },
+              "required": [
+                "placeOfVisit",
+                "placeType",
+                "address",
+                "visitedDate",
+                "modeOfTravel"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "contractedPersons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "age": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "gender": {
+                  "type": "string",
+                  "enum": [
+                    "M",
+                    "F"
+                  ]
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "secondaryPhoneNumber": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "age",
+                "gender",
+                "phoneNumber"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "callDetails",
+          "transactionDetails"
+        ],
+        "additionalProperties": false
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

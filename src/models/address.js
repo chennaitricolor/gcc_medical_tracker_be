@@ -50,7 +50,7 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
   address.associate = (db) => {
-    address.belongsTo(db['zones'], { foreignKey: 'location_id'})
+    address.belongsTo(db.zones, { foreignKey: 'location_id' });
   };
-  return address
+  return address;
 };

@@ -1,4 +1,5 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
 const session = require('express-session');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session);
@@ -8,6 +9,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const swaggerDocument = require('../assets/swagger.json');
 const routes = require('./routes');
 
 const app = express();
@@ -38,6 +40,7 @@ app.use('/health', (req, res) => res.json({
 }));
 
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/auth', routes.authRoute);
 app.use('/form', routes.formRoute);
 app.use('/dashboard', routes.dashboardRoute);
