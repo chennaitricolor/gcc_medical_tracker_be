@@ -25,24 +25,3 @@ services:
       DB_USER: ${DB_USER}
       ENABLE_SSL: ${ENABLE_SSL}
       REDIS_HOST: ${REDIS_HOST}
-    networks:
-      - traefik
-      - default
-    deploy:
-      replicas: ${NUMBER_REPLICAS}
-      update_config:
-        parallelism: 1
-        delay: 30s
-      restart_policy:
-        condition: ${SERVICE_RESTART_CONDITION}
-        delay: 10s
-      labels:
-        - traefik.frontend.rule=${TRAEFIK_FRONTEND_HOST}
-        - traefik.enable=true
-        - traefik.port=${TRAEFIK_PORT}
-        - traefik.docker.network=${TRAEFIK_NETWORK}
-        # Traefik service that listens to HTTP
-        #- traefik.redirectorservice.frontend.entryPoints=http
-        #- traefik.redirectorservice.frontend.redirect.entryPoint=https
-        # Traefik service that listens to HTTPS
-        #- traefik.webservice.frontend.entryPoints=https
