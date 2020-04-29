@@ -23,7 +23,7 @@ router.post('/login', validator(authSchema.login, 'body'), async (req, res) => {
     });
   }
 });
-router.post('/change-password', isTempUser, validator(authSchema.changePassword, 'body'), async (req, res) => {
+router.put('/password', isTempUser, validator(authSchema.changePassword, 'body'), async (req, res) => {
   try {
     const response = await authService.changePassword(req.session.user.userId, req.body.password);
     if (response) {

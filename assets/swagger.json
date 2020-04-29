@@ -52,7 +52,7 @@
       }
     },
     "/auth/password": {
-      "post": {
+      "put": {
         "tags": [
           "Authentication"
         ],
