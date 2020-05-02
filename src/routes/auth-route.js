@@ -13,7 +13,8 @@ router.post('/login', validator(authSchema.login, 'body'), async (req, res) => {
         isTempUser: loginResponse[1]
       };
       return res.send({
-        success: true
+        success: true,
+        isTempUser: loginResponse[1]
       });
     }
     throw new Error('Invalid Credentials');
