@@ -889,9 +889,7 @@
             "required": [
               "currentAddressSame",
               "currentAddress",
-              "healthStatus",
-              "symptoms",
-              "dateOfFirstSymptom"
+              "healthStatus"
             ],
             "additionalProperties": false,
             "oneOf": [
@@ -1358,9 +1356,7 @@
             "required": [
               "currentAddressChanged",
               "currentAddress",
-              "healthStatus",
-              "symptoms",
-              "dateOfFirstSymptom"
+              "healthStatus"
             ],
             "additionalProperties": false,
             "oneOf": [
