@@ -25,7 +25,10 @@ const getHospitals = async (hospitalName = '', offset) => {
             'area',
             ['city_or_district', 'city'],
             'state',
-            ['pin_code', 'pinCode']
+            ['pin_code', 'pinCode'],
+            ['building_type', 'buildingType'],
+            ['flat_building_no_and_floor', 'flatBuildingNoAndFloor'],
+              ['location_id', 'locationId']
           ]
         }
       ],
@@ -134,7 +137,10 @@ const getPerson = async (personId) => {
               'area',
               ['city_or_district', 'city'],
               'state',
-              ['pin_code', 'pinCode']
+              ['pin_code', 'pinCode'],
+              ['building_type', 'buildingType'],
+                ['flat_building_no_and_floor', 'flatBuildingNoAndFloor'],
+              ['location_id', 'locationId']
             ]
           },
           {
@@ -145,7 +151,10 @@ const getPerson = async (personId) => {
               'area',
               ['city_or_district', 'city'],
               'state',
-              ['pin_code', 'pinCode']
+              ['pin_code', 'pinCode'],
+              ['building_type', 'buildingType'],
+              ['flat_building_no_and_floor', 'flatBuildingNoAndFloor'],
+              ['location_id', 'locationId']
             ]
           }, {
             model: personDetails,
@@ -182,7 +191,10 @@ const getPerson = async (personId) => {
               'area',
               ['city_or_district', 'city'],
               'state',
-              ['pin_code', 'pinCode']
+              ['pin_code', 'pinCode'],
+              ['building_type', 'buildingType'],
+              ['flat_building_no_and_floor', 'flatBuildingNoAndFloor'],
+              ['location_id', 'locationId']
             ]
           }],
         attributes: {
@@ -206,7 +218,10 @@ const getPerson = async (personId) => {
               'area',
               ['city_or_district', 'city'],
               'state',
-              ['pin_code', 'pinCode']
+              ['pin_code', 'pinCode'],
+              ['building_type', 'buildingType'],
+              ['flat_building_no_and_floor', 'flatBuildingNoAndFloor'],
+              ['location_id', 'locationId']
             ]
           }, {
             model: hospitals,
