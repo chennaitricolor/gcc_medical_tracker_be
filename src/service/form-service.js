@@ -345,7 +345,7 @@ const constructPersonDetails = async (basicDetails, staticMap, transaction) => {
       { transaction });
     basicDetails.address = addressRecord[0].get('address_key');
     basicDetails.currentAddress = addressRecord[1].get('address_key');
-  } else if(basicDetails.address && checkObject(basicDetails.address)) {
+  } else if(basicDetails.address && checkObject(basicDetails.addres)) {
     const addressRecord = await address.create(objectMapper(basicDetails.address, AddressToDbMapper), { transaction });
     basicDetails.address = addressRecord.get('address_key');
     basicDetails.currentAddress = addressRecord.get('address_key');
@@ -401,8 +401,8 @@ const constructPersonContractedDetails = (contractedPersonsArray, personId, user
       contractedby: personId,
       createdAt: currentTimestamp
     };
-    contractDetails.address = contractDetails.isAddressAvailable === 'N' ? personCurrentAddress : contractDetails.address
-    contractDetails.currentAddress = contractDetails.isAddressAvailable === 'N' ? personCurrentAddress : contractDetails.address
+    contractDetails.address = contractDetails.isAddressAvailable === 'Y' ? personCurrentAddress : contractDetails.address
+    contractDetails.currentAddress = contractDetails.isAddressAvailable === 'Y' ? personCurrentAddress : contractDetails.address
     await constructPersonDetails(contractDetails, contractStaticMap, transaction)
   });
 };
