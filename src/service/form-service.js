@@ -181,8 +181,11 @@ const getPerson = async (personId) => {
         }
       }
     );
-    const getTravelDetails = async () => await personTravelDetails.findByPk
-    (personId, {
+    const getTravelDetails = async () => await personTravelDetails.findAll
+    ( {
+      where: {
+        person_identifier: personId
+      },
         include: [
           {
             model: address,

@@ -164,6 +164,7 @@ module.exports = {
         gender: Joi.string().only('M', 'F').required(),
         phoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }).required(),
         secondaryPhoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }),
+        address: addressJoi.required()
       })
     )
   }),
