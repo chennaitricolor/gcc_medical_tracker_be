@@ -115,7 +115,7 @@ const createPerson = async (formData, userId) => {
     }
 
     if (formData.contractedPersons) {
-      await constructPersonContractedDetails(formData.contractedPersons, personDetailsObject.get('person_identifier'), userId, createPersonTransaction, currentTimestamp);
+      await constructPersonContractedDetails(formData.contractedPersons, personDetailsObject.get('person_identifier'), userId, createPersonTransaction, currentTimestamp, personDetailsObject.get('current_address_key'));
     }
     await createPersonTransaction.commit();
   } catch (e) {
@@ -321,7 +321,7 @@ const updatePerson = async (updateDetails, personRecord, officerId) => {
     await constructPersonCallTransaction(updateDetails.transactionDetails, officerId, updatePersonTransaction);
 
     if(updateDetails.contractedPersons)
-      await constructPersonContractedDetails(updateDetails.contractedPersons, personRecord.person_identifier, officerId, updatePersonTransaction, currentTimestamp);
+      await constructPersonContractedDetails(updateDetails.contractedPersons, personRecord.person_identifier, officerId, updatePersonTransaction, currentTimestamp, personRecord.get('current_address_key'));
     if(updateDetails.travelDetails)
       await constructPersonTravelDetails(updateDetails.travelDetails, personRecord.person_identifier, updatePersonTransaction);
 
@@ -338,14 +338,14 @@ const updatePerson = async (updateDetails, personRecord, officerId) => {
 
 
 const constructPersonDetails = async (basicDetails, staticMap, transaction) => {
-  if (basicDetails.address && basicDetails.currentAddress) {
+  if (basicDetails.address && basicDetails.currentAddress && checkObject(basicDetails.address) && checkObject(basicDetails.currentAddress)) {
     const addressArray = [basicDetails.address, basicDetails.currentAddress];
     const addressRecord = await address.bulkCreate(
       addressArray.map(addressData => objectMapper(addressData, AddressToDbMapper)),
       { transaction });
     basicDetails.address = addressRecord[0].get('address_key');
     basicDetails.currentAddress = addressRecord[1].get('address_key');
-  } else if(basicDetails.address) {
+  } else if(basicDetails.address && checkObject(basicDetails.address)) {
     const addressRecord = await address.create(objectMapper(basicDetails.address, AddressToDbMapper), { transaction });
     basicDetails.address = addressRecord.get('address_key');
     basicDetails.currentAddress = addressRecord.get('address_key');
@@ -392,7 +392,7 @@ const constructPersonTravelDetails = (travelDetailsArray, personId, transaction)
     return await personTravelDetails.create(objectMapper(travelDetails, TravelDetailToDbMapper), {transaction});
   });
 };
-const constructPersonContractedDetails = (contractedPersonsArray, personId, userId, transaction, currentTimestamp) => {
+const constructPersonContractedDetails = (contractedPersonsArray, personId, userId, transaction, currentTimestamp, personCurrentAddress) => {
   return Promise.map(contractedPersonsArray, async (contractDetails) => {
     const contractStaticMap = {
       person_status: PERSON_STATUS.OPEN,
@@ -401,9 +401,13 @@ const constructPersonContractedDetails = (contractedPersonsArray, personId, user
       contractedby: personId,
       createdAt: currentTimestamp
     };
+    contractDetails.address = contractDetails.isAddressAvailable === 'Y' ? personCurrentAddress : contractDetails.address
+    contractDetails.currentAddress = contractDetails.isAddressAvailable === 'Y' ? personCurrentAddress : contractDetails.address
     await constructPersonDetails(contractDetails, contractStaticMap, transaction)
   });
 };
+
+const checkObject = (a) => typeof a === 'object' && a !== null;
 
 module.exports = {
   createPerson,

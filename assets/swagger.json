@@ -1024,13 +1024,72 @@
                 },
                 "secondaryPhoneNumber": {
                   "type": "string"
+                },
+                "isAddressAvailable": {
+                  "type": "string",
+                  "enum": [
+                    "Y",
+                    "N"
+                  ]
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Apartment",
+                        "Individual House",
+                        "Hospital",
+                        "Others"
+                      ]
+                    },
+                    "numberAndFloor": {
+                      "type": "string"
+                    },
+                    "street": {
+                      "type": "string"
+                    },
+                    "addressMeta": {
+                      "type": "string"
+                    },
+                    "area": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string",
+                      "default": "Chennai"
+                    },
+                    "state": {
+                      "type": "string",
+                      "default": "Tamil Nadu"
+                    },
+                    "pinCode": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "locationId": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "numberAndFloor",
+                    "street",
+                    "area",
+                    "pinCode",
+                    "locationId"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name",
                 "age",
                 "gender",
-                "phoneNumber"
+                "phoneNumber",
+                "isAddressAvailable"
               ],
               "additionalProperties": false
             }
@@ -1491,13 +1550,72 @@
                 },
                 "secondaryPhoneNumber": {
                   "type": "string"
+                },
+                "isAddressAvailable": {
+                  "type": "string",
+                  "enum": [
+                    "Y",
+                    "N"
+                  ]
+                },
+                "address": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Apartment",
+                        "Individual House",
+                        "Hospital",
+                        "Others"
+                      ]
+                    },
+                    "numberAndFloor": {
+                      "type": "string"
+                    },
+                    "street": {
+                      "type": "string"
+                    },
+                    "addressMeta": {
+                      "type": "string"
+                    },
+                    "area": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string",
+                      "default": "Chennai"
+                    },
+                    "state": {
+                      "type": "string",
+                      "default": "Tamil Nadu"
+                    },
+                    "pinCode": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "locationId": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "numberAndFloor",
+                    "street",
+                    "area",
+                    "pinCode",
+                    "locationId"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "required": [
                 "name",
                 "age",
                 "gender",
-                "phoneNumber"
+                "phoneNumber",
+                "isAddressAvailable"
               ],
               "additionalProperties": false
             }

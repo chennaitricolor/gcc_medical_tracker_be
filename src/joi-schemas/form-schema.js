@@ -96,6 +96,8 @@ module.exports = {
         gender: Joi.string().only('M', 'F').required(),
         phoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }).required(),
         secondaryPhoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }),
+        isAddressAvailable: Joi.string().only('Y', 'N').required(),
+        address: addressJoi.when('isAddressAvailable', {is: 'Y', then: Joi.required(), otherwise: Joi.optional()})
       }).required()
     )
   }),
@@ -164,7 +166,8 @@ module.exports = {
         gender: Joi.string().only('M', 'F').required(),
         phoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }).required(),
         secondaryPhoneNumber: phoneJoi.string().phoneNumber({ defaultCountry: 'IN', strict: true }),
-        address: addressJoi.required()
+        isAddressAvailable: Joi.string().only('Y', 'N').required(),
+        address: addressJoi.when('isAddressAvailable', {is: 'Y', then: Joi.required(), otherwise: Joi.optional()})
       })
     )
   }),
