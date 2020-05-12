@@ -401,8 +401,8 @@ const constructPersonContractedDetails = (contractedPersonsArray, personId, user
       contractedby: personId,
       createdAt: currentTimestamp
     };
-    contractDetails.address = contractDetails.isAddressAvailable === 'Y' ? personCurrentAddress : contractDetails.address
-    contractDetails.currentAddress = contractDetails.isAddressAvailable === 'Y' ? personCurrentAddress : contractDetails.address
+    contractDetails.address = contractDetails.isAddressAvailable === 'N' ? personCurrentAddress : contractDetails.address
+    contractDetails.currentAddress = contractDetails.isAddressAvailable === 'N' ? personCurrentAddress : contractDetails.address
     await constructPersonDetails(contractDetails, contractStaticMap, transaction)
   });
 };
