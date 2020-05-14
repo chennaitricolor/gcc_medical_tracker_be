@@ -198,7 +198,7 @@
             "in": "query",
             "name": "zone",
             "schema": {
-              "type": "number"
+              "type": "string"
             }
           },
           {
@@ -448,7 +448,7 @@
                                 "example": "61,62,63"
                               },
                               "zone": {
-                                "type": "number"
+                                "type": "string"
                               }
                             }
                           }

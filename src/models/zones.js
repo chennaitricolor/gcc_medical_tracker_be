@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true
     },
     zone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true
     },
     latitude: {

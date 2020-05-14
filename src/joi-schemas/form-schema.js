@@ -32,7 +32,7 @@ module.exports = {
     area: Joi.string(),
     location: Joi.string(),
     ward: Joi.number(),
-    zone: Joi.number()
+    zone: Joi.string()
   }),
   locationType: Joi.object({
     type: Joi.string().only(LOCATION_TYPES)
