@@ -29,7 +29,7 @@ CREATE TABLE public.zones (
 	"location" varchar(50) NULL,
 	area varchar(50) NULL,
 	ward int4 NULL,
-	"zone" int4 NULL,
+	"zone" varchar(50) NULL,
 	latitude numeric(12,9) NULL,
 	longitude numeric(12,9) NULL,
 	CONSTRAINT zones_pkey PRIMARY KEY (location_id)

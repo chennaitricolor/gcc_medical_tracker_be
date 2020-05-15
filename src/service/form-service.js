@@ -58,19 +58,11 @@ const getLocation = async (filter, group) => {
       'zone',
     );
     for (let key in filter)
-      if (key !== 'zone' && key !== 'zone') {
-        andArgs.push(Sequelize.where(
-          Sequelize.fn('lower', Sequelize.col(key)),
-          {
-            [Sequelize.Op.substring]: filter[key].toLowerCase()
-          }));
-      } else {
-        andArgs.push({
-          [key]: {
-            [Sequelize.Op.eq]: filter[key]
-          }
-        })
-      }
+      andArgs.push(Sequelize.where(
+        Sequelize.fn('lower', Sequelize.col(key)),
+        {
+          [Sequelize.Op.substring]: filter[key].toLowerCase()
+        }));
 
 
     const zoneRecords = await zones.findAll({
