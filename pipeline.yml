@@ -23,6 +23,7 @@ vault:
     - REDIS_HOST
     - AUTH_KEY
     - DB_PWD
+    - NODE_ENV
   prod:
     - DB_PORT
     - DB_NAME
@@ -32,3 +33,4 @@ vault:
     - REDIS_HOST
     - AUTH_KEY
     - DB_PWD
+    - NODE_ENV
