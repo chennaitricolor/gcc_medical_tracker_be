@@ -24,6 +24,13 @@ vault:
     - AUTH_KEY
     - DB_PWD
     - NODE_ENV
+    - AWS_IAM_ACCOUNT_ID
+    - AWS_IAM_ROLE_SESSION_NAME
+    - AWS_IAM_ROLE_ARN
+    - AWS_IAM_POOL_ID
+    - AWS_IAM_REGION
+    - AWS_QS_REGION
+    - AWS_QS_DASHBOARD_ID
   prod:
     - DB_PORT
     - DB_NAME
@@ -34,3 +41,10 @@ vault:
     - AUTH_KEY
     - DB_PWD
     - NODE_ENV
+    - AWS_IAM_ACCOUNT_ID
+    - AWS_IAM_ROLE_SESSION_NAME
+    - AWS_IAM_ROLE_ARN
+    - AWS_IAM_POOL_ID
+    - AWS_IAM_REGION
+    - AWS_QS_REGION
+    - AWS_QS_DASHBOARD_ID
