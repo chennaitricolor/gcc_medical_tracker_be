@@ -55,7 +55,9 @@
     "sequelize": "^5.19.6",
     "swagger-jsdoc": "^3.0.3",
     "swagger-ui-express": "^4.1.4",
-    "tedious": "^2.6.4"
+    "tedious": "^2.6.4",
+    "amazon-quicksight-embedding-sdk": "^1.0.7",
+    "aws-sdk": "^2.681.0"
   },
   "private": true
 }

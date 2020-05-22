@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { isAuthUser } = require('../middleware/auth');
-const { dashboardService } = require('../service');
+const { dashboardService, quicksightService } = require('../service');
 const validator = require('../middleware/validator');
 const { dashboardSchema } = require('../joi-schemas');
 
@@ -34,4 +34,18 @@ router.get('/wards/:id', isAuthUser, validator(dashboardSchema.getPersonsParam, 
       });
     }
   });
+
+  router.get('/reports/gcc-dashboard', isAuthUser, (req, res) => {
+    try {
+      quicksightService.getReport().then((response, err) => {
+        return res.send(response);
+      });
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({
+        message: e.message
+      });
+    }
+  });
+  
 module.exports = router;
