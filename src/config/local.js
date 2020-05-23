@@ -1,6 +1,6 @@
 module.exports = {
   db: {
-    username: 'riyaz',
+    username: 'jegan',
     password: '',
     database: 'gcc_medical_tracker',
     host: 'localhost',

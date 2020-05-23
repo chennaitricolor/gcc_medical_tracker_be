@@ -18,7 +18,7 @@ const getZones = async () => {
   }
 };
 
-const getPersons = async (ward, {offset=0, name, gender, age, currentAddress, permanentAddress, healthStatus  }={}) => {
+const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, permanentAddress, healthStatus  }={}) => {
   try {
     const conditions = {
       where: {
@@ -49,8 +49,9 @@ const getPersons = async (ward, {offset=0, name, gender, age, currentAddress, pe
       }
     };
     const transactionRecords = await personDetails.findAndCountAll({
+      offset:((offset-1)*10),
       limit: 10,
-      offset,
+      subQuery:false,
       include: [
         {
           model: address,

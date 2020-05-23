@@ -1,6 +1,6 @@
 const LOCATION_TYPES = ['area', 'ward', 'zone', 'location', 'street_name'];
 const BUILDING_TYPE = ['Apartment', 'Home', 'Hospital', 'Others'];
-const HEALTH_STATUS = ['Home Quarantine', 'COVID Center', 'COVID Health Center', 'COVID Hospital', 'Others'];
+const HEALTH_STATUS = ['Home Quarantine', 'COVID Center', 'COVID Health Center', 'COVID Hospital', 'POSITIVE','NEGATIVE','Others'];
 const PERSON_STATUS = { CLOSED: 'closed', OPEN: 'open' };
 const CALL_TYPE = { IN: 'incoming', OUT: 'outgoing' };
 const PLACE_TYPE = ['Mall', 'Theater', 'Place of worship', 'Market', 'Others'];

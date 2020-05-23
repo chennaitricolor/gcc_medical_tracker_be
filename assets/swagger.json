@@ -542,7 +542,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "quarantined"
+                ["Home Quarantine", "COVID Center", "COVID Health Center", "COVID Hospital", "POSITIVE","NEGATIVE","Others"]
               ]
             }
           }
