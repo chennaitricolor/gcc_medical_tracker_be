@@ -18,13 +18,19 @@ const getZones = async () => {
   }
 };
 
-const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, permanentAddress, healthStatus  }={}) => {
+const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, permanentAddress, healthStatus, phoneNumber }={}) => {
   try {
+    console.log(phoneNumber);
     const conditions = {
       where: {
         ...(name && {
           name: {
             [Sequelize.Op.substring]: name
+          }
+        }),
+        ...('phone_number' && {
+          phone_number: {
+            [Sequelize.Op.substring]: phoneNumber
           }
         }),
         ...(gender && {
@@ -101,7 +107,7 @@ const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, pe
         }
       ],
       attributes: [
-        'name', 'age', 'gender', ['createdAt', 'trackingSince']
+        'name', 'age', 'gender', 'phone_number', ['createdAt', 'trackingSince']
       ],
       ...conditions
     });

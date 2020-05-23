@@ -12,6 +12,7 @@ module.exports = {
     age: Joi.number(),
     currentAddress: Joi.string(),
     permanentAddress: Joi.string(),
-    healthStatus: Joi.string().only(HEALTH_STATUS)
+    healthStatus: Joi.string().only(HEALTH_STATUS),
+    phoneNumber: Joi.string()
   })
 };
