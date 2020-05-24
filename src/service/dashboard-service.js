@@ -119,7 +119,7 @@ const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, pe
 const getPersonsMap = async () => {
   try {
     const transactionRecords = await sequelize.query(`SELECT jsonb_object_agg(t.locationVal, t.person) as result from 
-    (SELECT concat_ws(',', zones.longitude , zones.latitude ) as locationVal, array_agg(json_build_object('name',person_details."name", 'gender',person_details.gender, 'phone', person_details.person_identifier )) as person
+    (SELECT concat_ws(',', zones.longitude , zones.latitude ) as locationVal, array_agg(json_build_object('name',person_details."name", 'gender',person_details.gender, 'phone', person_details.phone_number )) as person
     FROM zones
     INNER JOIN address
     ON address.location_id = zones.location_id
