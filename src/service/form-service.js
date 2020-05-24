@@ -227,7 +227,7 @@ const getPerson = async (personId) => {
           }
         ],
         attributes: {
-          exclude: ['hospital_id', 'person_identifier', 'current_address_key', 'call_id']
+          exclude: ['person_identifier', 'current_address_key', 'call_id']
         }
       }
     );

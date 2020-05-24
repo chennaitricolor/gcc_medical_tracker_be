@@ -20,7 +20,6 @@ const getZones = async () => {
 
 const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, permanentAddress, healthStatus, phoneNumber }={}) => {
   try {
-    console.log(phoneNumber);
     const conditions = {
       where: {
         ...(name && {
@@ -28,7 +27,7 @@ const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, pe
             [Sequelize.Op.substring]: name
           }
         }),
-        ...('phone_number' && {
+        ...(phoneNumber && {
           phone_number: {
             [Sequelize.Op.substring]: phoneNumber
           }
