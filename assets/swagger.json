@@ -542,7 +542,15 @@
             "schema": {
               "type": "string",
               "enum": [
-                ["Home Quarantine", "COVID Center", "COVID Health Center", "COVID Hospital", "POSITIVE","NEGATIVE","Others"]
+                [
+                  "Home Quarantine",
+                  "COVID Center",
+                  "COVID Health Center",
+                  "COVID Hospital",
+                  "POSITIVE",
+                  "NEGATIVE",
+                  "Others"
+                ]
               ]
             }
           }
@@ -565,6 +573,60 @@
                         },
                         "persons": {
                           "type": "object"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/reports/map": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Get persons categorized by location",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "gender": {
+                              "type": "string"
+                            },
+                            "phone": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
