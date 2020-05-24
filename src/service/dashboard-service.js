@@ -1,5 +1,5 @@
 const { address, zones, personDetails,
-  personCallTransaction, Sequelize } = require('../models');
+  personCallTransaction, Sequelize, sequelize } = require('../models');
 
 const getZones = async () => {
   try {
@@ -116,7 +116,25 @@ const getPersons = async (ward, {offset=1, name, gender, age, currentAddress, pe
   }
 };
 
+const getPersonsMap = async () => {
+  try {
+    const transactionRecords = await sequelize.query(`SELECT jsonb_object_agg(t.locationVal, t.person) as result from 
+    (SELECT concat_ws(',', zones.longitude , zones.latitude ) as locationVal, array_agg(json_build_object('name',person_details."name", 'gender',person_details.gender, 'phone', person_details.person_identifier )) as person
+    FROM zones
+    INNER JOIN address
+    ON address.location_id = zones.location_id
+    INNER JOIN person_details
+    ON person_details.current_address_key = address.address_key
+    GROUP BY locationVal) t;`)
+    return transactionRecords.length && transactionRecords[0][0].result;
+  } catch (e) {
+    throw e;
+  }
+};
+
+
 module.exports = {
   getZones,
-  getPersons
+  getPersons,
+  getPersonsMap
 };

@@ -47,5 +47,19 @@ router.get('/wards/:id', isAuthUser, validator(dashboardSchema.getPersonsParam, 
       });
     }
   });
+
+  router.get('/reports/map', isAuthUser, async (req, res) => {
+    try {
+      return res.send({
+        success: true,
+        result: await dashboardService.getPersonsMap(),
+      });
+    } catch (e) {
+      console.log(e);
+      return res.status(500).json({
+        message: e.message
+      });
+    }
+  });
   
 module.exports = router;
