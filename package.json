@@ -57,7 +57,7 @@
     "swagger-ui-express": "^4.1.4",
     "tedious": "^2.6.4",
     "amazon-quicksight-embedding-sdk": "^1.0.7",
-    "aws-sdk": "^2.681.0"
+    "aws-sdk": "^2.814.0"
   },
   "private": true
 }
